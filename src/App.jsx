@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import FeatureGrid from './components/FeatureGrid';
 import CTA from './components/CTA';
+import RoleTabs from './components/RoleTabs';
+import StudentPanel from './components/StudentPanel';
+import WardenPanel from './components/WardenPanel';
+import AdminPanel from './components/AdminPanel';
 
 function Footer() {
   return (
@@ -20,12 +24,18 @@ function Footer() {
 }
 
 export default function App() {
+  const [role, setRole] = useState('Student');
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
       <main className="flex-1">
         <Hero />
         <FeatureGrid />
+        <RoleTabs value={role} onChange={setRole} />
+        {role === 'Student' && <StudentPanel />}
+        {role === 'Warden' && <WardenPanel />}
+        {role === 'Admin' && <AdminPanel />}
         <CTA />
       </main>
       <Footer />
